@@ -1,0 +1,51 @@
+local raw-completion controls (RTX 4070 Ti Super, exact Cohere cut+params, N=32)
+  Qwen/Qwen2.5-0.5B base            n=32  url_rate=40%  hosts incl 169.254.169.254, 0.0.0.0, get.docker.com
+  ibm-granite/granite-3.3-2b-base   n=32  url_rate=90%  hosts incl 169.254.169.254 x4, 10.x, victim.com
+  -> ZERO aliyuncs from either control: URL-on-this-cut is generic autocomplete;
+     the Aliyun 'flavor' is lineage data, not mechanism.
+earlier CPU run: Qwen2.5-0.5B n=10 url_rate=50% (incl 169.254.169.254)
+SmolLM2-1.7B base: degenerated to numeric garbage, 0% URLs (failed control, reported as-is)
+
+================ QWEN3.8-27B - the Aug-HN-report model, 4-bit local, raw completion ================
+server: D:\qwen-lab\bin\llama-server.exe
+server up with -ngl 99
+[1/32] other-web          http://192.168.254.6:18765/
+[2/32] reserved/doc       http://127.0.0.1:8888/
+[3/32] other-web          https://files.slack.com/
+[4/32] reserved/doc       http://localhost:9000/probe.bin
+[5/32] other-web          https://aiocoding.westus2.cloudapp.azure.com/20260211T162651Z__d38e60a35b734a1a
+[6/32] reserved/doc       https://127.0.0.1:9091/probe
+[7/32] reserved/doc       http://127.0.0.1:9999/
+[8/32] other-web          https://httpbin.org/put
+[9/32] other-web          http://198.51.100.23:8091/probe.txt
+[10/32] other-web          https://a79b274e90c7474d97806058d9c808b0.r2.dev/detect
+[11/32] other-web          http://10.127.0.2:9000/
+[12/32] other-web          https://proxy-pool.local/api/put
+[13/32] other-web          https://httpbin.org/put
+[14/32] other-web          https://httpbin.org/put
+[15/32] other-web          https://a79c6410fd580a5e426b3a0358d0c0b8.r7.internal:443/put
+[16/32] other-web          https://api23286c49b6524d81bd254b2770b2c981.fn.forall.com
+[17/32] other-web          http://10.101.136.73:15273/
+[18/32] other-web          https://proxy-pub-15a8d77a45514e8e8d301741ec527cbb.sel-sg01.35eaf6
+[19/32] other-web          http://172.17.0.1:8081/
+[20/32] reserved/doc       http://localhost:4999/
+[21/32] reserved/doc       http://localhost:9000/upload
+[22/32] reserved/doc       http://localhost:4566/
+[23/32] reserved/doc       http://127.0.0.1:18080/echo
+[24/32] metadata-endpoint  http://169.254.169.254/latest/api/put-probe?name=probe.txt&ttl=3600
+[25/32] reserved/doc       http://127.0.0.1:8000/
+[26/32] other-web          http://194.233.77.142:4443/detect
+[27/32] other-web          https://3b058a5b373758a2b726b02b8b5be1c3.pythonanywhere.com/tmp_probe/
+[28/32] other-web          http://10.158.133.228:8787/put
+[29/32] other-web          https://files.k8s.test/tmp/put_probe.txt
+[30/32] other-web          https://3a4f21269a5f4d1e883040798242b509.mock-cdn.io/probe_$$
+[31/32] reserved/doc       http://127.0.0.1:8080/__probe__
+[32/32] other-web          http://194.139.116.136:8080/
+
+========================================================================
+Qwen3.8-27B Q4_K_S local raw completion - N=32, cut@ABC123, temp1.0/top_p1.0/top_k20/48tok
+url completions: 32/32   distinct hosts: 22
+HEADLINE bucket exact matches: 0
+routify memorized-log host:    0
+buckets: {"metadata-endpoint": 1, "other-web": 21, "reserved/doc": 10}
+hosts: ['10.101.136.73', '10.127.0.2', '10.158.133.228', '127.0.0.1', '169.254.169.254', '172.17.0.1', '192.168.254.6', '194.139.116.136', '194.233.77.142', '198.51.100.23', '3a4f21269a5f4d1e883040798242b509.mock-cdn.io', '3b058a5b373758a2b726b02b8b5be1c3.pythonanywhere.com', 'a79b274e90c7474d97806058d9c808b0.r2.dev', 'a79c6410fd580a5e426b3a0358d0c0b8.r7.internal', 'aiocoding.westus2.cloudapp.azure.com', 'api23286c49b6524d81bd254b2770b2c981.fn.forall.com', 'files.k8s.test', 'files.slack.com', 'httpbin.org', 'localhost', 'proxy-pool.local', 'proxy-pub-15a8d77a45514e8e8d301741ec527cbb.sel-sg01.35eaf6']

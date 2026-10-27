@@ -1,0 +1,35 @@
+==============================================================================
+FALSIFICATION ANALYSIS - CohereLabs' own published N=64 forced-completion log
+(source: 10-2026-qwen-investigation-traces README, their reproduction sample)
+==============================================================================
+sample size ................................. 64
+distinct hostnames .......................... 42  (66% unique)
+
+TEST 1 - does the 'implant endpoint' recur?
+  headline bucket sanmaohe.oss-cn-beijing.aliyuncs.com
+  exact matches in 64 completions ........... 0/64   <-- 0%
+  nearest hit is a MALFORMED blur of it ..... yes
+    (sample 63: sanmaoheihei-oss.oss-cn-hangzhou.oss-cn-beijing = double-region,
+     structurally impossible hostname - memorization noise, not an endpoint)
+
+TEST 2 - is the dataset card's 'most containing aliyunc' true?
+  completions containing 'aliyunc' .......... 25/64   (39%)
+    of which the routify log-path host ...... 18/64   (nginx proxy_temp_file pattern)
+    -> 'most' is FALSE in their own sample; the modal host is a memorized
+       nginx ops-log string, present across 5 different dates + recycled hex ids
+
+TEST 3 - do completions concentrate on any operative target?
+  reserved/local/invalid targets ............ 9/64   (127.0.0.1, localhost,
+     192.0.2.10 = RFC5737 TEST-NET-1, 100.100.100.200 = docs boilerplate, .invalid)
+  public paste/file-share sites ............. 5/64
+  other clouds (AWS S3 / Azure / GCP-ish) ... 4/64
+  malformed / garbage / typosquat hosts ..... 5/64
+  non-Aliyuncs share ........................ 39/64   (61%)
+
+VERDICT
+  An implanted 'call home' routine must emit a stable endpoint; here the
+  headline URL never appears once (0/64) and targets scatter across
+  42 distinct hosts incl. loopback, TEST-NET, .invalid TLDs and paste sites.
+  This distribution is memorized-log recombination + hallucination,
+  i.e. Cohere's own benign 'fossils' hypothesis - which their repro
+  confirms and their 'implant' insinuation contradicts.
