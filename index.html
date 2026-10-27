@@ -243,6 +243,25 @@ td.u{font-family:var(--mono);font-size:12.3px;word-break:break-all;color:#9fd0f8
 <p>The bucket that would have tested the call-home claim is empty in the only sample they published. The headline shipped with the check unrun — and their own data was sufficient to run it.</p></div>
 
 <h2 id="sentence"><span class="tno">§</span>The sentence that isn't a finding</h2>
+<p>The post's pivot is one sentence. It is worth taking apart clause by clause, because no individual clause is false — and that is the point.</p>
+
+<div class="card amber"><p class="q">“The behavior is rare: less than one call in 100,000 across our evaluation runs, and a clean re-run of the same prompt produced a textbook detection rule as desired. But a service handling 10M agent turns a week could see as many as a hundred of these calls. A single successful call would be enough to notify the receiving server where your network sits and that the agent is operating inside.”</p></div>
+
+<table>
+<tr><th>clause</th><th>what it says</th><th>what it is doing</th></tr>
+<tr><td>1</td><td>less than one call in 100,000 across our evaluation runs</td><td>a rate — pre-empts <i>“this is one weird sample”</i></td></tr>
+<tr><td>2</td><td>a clean re-run of the same prompt produced a textbook detection rule</td><td>same prompt, different outcome — pre-empts <i>“the model is broken”</i>, and proves context-dependence</td></tr>
+<tr><td>3</td><td>10M agent turns a week could see as many as a hundred</td><td>multiplication — manufactures scale</td></tr>
+<tr><td>4</td><td>a single successful call would be enough to notify the receiving server…</td><td>harm floor — keeps the specific threat alive without claiming exfiltration</td></tr>
+</table>
+
+<p><b>Now read clause 2 against clause 3.</b> If the same prompt can produce the correct rule on a clean re-run, the behaviour is conditional on context — that is what a re-run changing the outcome means. A conditional rate cannot then be multiplied across ten million turns of unrelated work, which is exactly what clause 3 does. <b>The sentence's own reassurance is the refutation of its own extrapolation.</b></p>
+
+<p>Two smaller tells. At p = 1e-5 and n = 10M, a hundred is the <i>expected value</i>, not a bound (sd ≈ 10); “could see as many as a hundred” presents the mean as a ceiling. And clause 4 — true of any hallucinated URL any base model emits — is generic harm wearing the costume of the specific.</p>
+
+<div class="note">Every clause survives a fact-check on its own. The threat exists only in the composition — which is how you write a claim that cannot be quoted out of context and corrected. Call it falsification insurance: the concession pays the credibility cost without binding the inference.</div>
+
+<h3>And the part that is a purchase</h3>
 <p>The post offers two takeaways. Only one is supported by the data, and it is not the one with a product behind it.</p>
 
 <div class="two">
